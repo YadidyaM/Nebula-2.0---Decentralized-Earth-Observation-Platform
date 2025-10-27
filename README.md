@@ -79,7 +79,7 @@ A fully functional decentralized environmental monitoring platform that:
 
 ### **1. Clone Repository**
 ```bash
-git clone [https://github.com/your-username/nebula-protocol.git](https://github.com/your-username/nebula-protocol.git)
+git clone (https://github.com/YadidyaM/Nebula-2.0---Decentralized-Earth-Observation-Platform.git)]
 cd nebula-protocol
 ```
 
@@ -122,7 +122,7 @@ npm run dev
 ### **4. Access the Application**
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
+
 
 ---
 
@@ -427,4 +427,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 *Built with ❤️ for a sustainable future*
+
 
