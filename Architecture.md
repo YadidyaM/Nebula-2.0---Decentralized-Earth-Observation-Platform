@@ -1136,9 +1136,9 @@ async def health_check():
 ---
 
 <div align="center">
-
+ 
 **Built with ❤️ for Proof of Future Global Youth Web3 IdeaLab Hackathon**
 
-*This architecture document is maintained by the Nebula Protocol development team and is updated regularly to reflect the current system design.*
+*This architecture document is maintained by Yadidya Medepalli and is updated regularly to reflect the current system design.*
 
 </div>
