@@ -37,14 +37,14 @@ We created Nebula Protocol - a decentralized environmental monitoring network fe
 
 #### **🤖 Swarms AI Orchestration**
 - **8 Specialized AI Agents** for different environmental monitoring tasks:
-  - 🌲 **Forest Guardian** - Deforestation and wildfire detection
-  - 🧊 **Ice Sentinel** - Arctic ice monitoring and climate tracking
-  - ⛈️ **Storm Tracker** - Weather pattern analysis and storm prediction
-  - 🏙️ **Urban Monitor** - Air quality and urban environmental health
-  - 💧 **Water Watcher** - Water quality and flood monitoring
-  - 🛡️ **Security Sentinel** - System security and threat detection
-  - 🌍 **Land Surveyor** - Geological and land use monitoring
-  - 🚨 **Disaster Responder** - Emergency response coordination
+- 🌲 **Forest Guardian** - Deforestation and wildfire detection
+- 🧊 **Ice Sentinel** - Arctic ice monitoring and climate tracking
+- ⛈️ **Storm Tracker** - Weather pattern analysis and storm prediction
+- 🏙️ **Urban Monitor** - Air quality and urban environmental health
+- 💧 **Water Watcher** - Water quality and flood monitoring
+- 🛡️ **Security Sentinel** - System security and threat detection
+- 🌍 **Land Surveyor** - Geological and land use monitoring
+- 🚨 **Disaster Responder** - Emergency response coordination
 - **Hierarchical Swarm Coordination** for complex multi-agent missions
 - **Real-time Decision Making** based on environmental data analysis
 - **Adaptive Learning** from environmental patterns and user feedback
@@ -427,3 +427,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 *Built with ❤️ for a sustainable future*
+
