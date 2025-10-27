@@ -7,6 +7,12 @@
 [![Swarms AI](https://img.shields.io/badge/Swarms-AI-purple?style=for-the-badge&logo=openai)](https://swarms.ai)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
+<p align="center">
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExenRsZ3Q0eDNyNXFjaGtsemN3NHc3ZTBocXM4MDQ2NXpocTMxdGt0YSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/8Am0UlfiwZcgEDOy4h/giphy.gif" height="140" />
+</p>
+
+🔗 **Live Demo:** https://nebulav2.netlify.app/
+
 ## 🎯 **Overview**
 
 ### **Situation**
@@ -31,14 +37,14 @@ We created Nebula Protocol - a decentralized environmental monitoring network fe
 
 #### **🤖 Swarms AI Orchestration**
 - **8 Specialized AI Agents** for different environmental monitoring tasks:
-  - 🌲 **Forest Guardian** - Deforestation and wildfire detection
-  - 🧊 **Ice Sentinel** - Arctic ice monitoring and climate tracking
-  - ⛈️ **Storm Tracker** - Weather pattern analysis and storm prediction
-  - 🏙️ **Urban Monitor** - Air quality and urban environmental health
-  - 💧 **Water Watcher** - Water quality and flood monitoring
-  - 🛡️ **Security Sentinel** - System security and threat detection
-  - 🌍 **Land Surveyor** - Geological and land use monitoring
-  - 🚨 **Disaster Responder** - Emergency response coordination
+  - 🌲 **Forest Guardian** - Deforestation and wildfire detection
+  - 🧊 **Ice Sentinel** - Arctic ice monitoring and climate tracking
+  - ⛈️ **Storm Tracker** - Weather pattern analysis and storm prediction
+  - 🏙️ **Urban Monitor** - Air quality and urban environmental health
+  - 💧 **Water Watcher** - Water quality and flood monitoring
+  - 🛡️ **Security Sentinel** - System security and threat detection
+  - 🌍 **Land Surveyor** - Geological and land use monitoring
+  - 🚨 **Disaster Responder** - Emergency response coordination
 - **Hierarchical Swarm Coordination** for complex multi-agent missions
 - **Real-time Decision Making** based on environmental data analysis
 - **Adaptive Learning** from environmental patterns and user feedback
@@ -73,7 +79,7 @@ A fully functional decentralized environmental monitoring platform that:
 
 ### **1. Clone Repository**
 ```bash
-git clone https://github.com/your-username/nebula-protocol.git
+git clone [https://github.com/your-username/nebula-protocol.git](https://github.com/your-username/nebula-protocol.git)
 cd nebula-protocol
 ```
 
@@ -130,13 +136,13 @@ npm run dev
 MONGODB_URL=mongodb://localhost:27017/nebula_protocol
 
 # Solana Configuration
-SOLANA_RPC_URL=https://api.devnet.solana.com
+SOLANA_RPC_URL=[https://api.devnet.solana.com](https://api.devnet.solana.com)
 SOLANA_PRIVATE_KEY=your_solana_private_key_here
 SOLANA_PROGRAM_ID=your_program_id_here
 
 # Swarms AI Configuration
 SWARMS_API_KEY=your_swarms_api_key_here
-SWARMS_BASE_URL=https://api.swarms.ai
+SWARMS_BASE_URL=[https://api.swarms.ai](https://api.swarms.ai)
 
 # External APIs
 NASA_API_KEY=your_nasa_api_key_here
@@ -159,7 +165,7 @@ VITE_API_URL=http://localhost:8000/api/v1
 VITE_WS_URL=ws://localhost:8000/ws
 
 # Solana Configuration
-VITE_SOLANA_RPC_URL=https://api.devnet.solana.com
+VITE_SOLANA_RPC_URL=[https://api.devnet.solana.com](https://api.devnet.solana.com)
 VITE_SOLANA_NETWORK=devnet
 
 # External Services
@@ -175,45 +181,45 @@ VITE_ENABLE_3D_VISUALIZATION=true
 
 #### **🌌 Solana**
 1. **Solana RPC Endpoint**: Get from [Solana RPC Providers](https://docs.solana.com/cluster/rpc-endpoints)
-   - **Devnet**: `https://api.devnet.solana.com` (free)
-   - **Mainnet**: Use Alchemy, QuickNode, or Helius (paid)
+   - **Devnet**: `https://api.devnet.solana.com` (free)
+   - **Mainnet**: Use Alchemy, QuickNode, or Helius (paid)
 
 2. **Solana Wallet**: Generate using Solana CLI
-   ```bash
-   solana-keygen new --outfile ~/.config/solana/id.json
-   ```
+   ```bash
+   solana-keygen new --outfile ~/.config/solana/id.json
+   ```
 
 #### **🤖 Swarms AI**
 1. **Swarms API Key**: Get from [Swarms AI Platform](https://swarms.ai)
-   - Sign up for developer access
-   - Generate API key from dashboard
-   - Configure agent models and parameters
+   - Sign up for developer access
+   - Generate API key from dashboard
+   - Configure agent models and parameters
 
 #### **🛰️ Environmental Data APIs**
 1. **NASA API**: Get from [NASA API Portal](https://api.nasa.gov)
-   - Free tier: 1000 requests/hour
-   - Required for satellite imagery and Earth observation data
+   - Free tier: 1000 requests/hour
+   - Required for satellite imagery and Earth observation data
 
 2. **NOAA API**: Get from [NOAA API](https://www.weather.gov/documentation/services-web-api)
-   - Free tier: 1000 requests/day
-   - Required for weather data and storm tracking
+   - Free tier: 1000 requests/day
+   - Required for weather data and storm tracking
 
 3. **USGS API**: Get from [USGS API](https://earthquake.usgs.gov/fdsnws/event/1/)
-   - Free tier: No rate limits
-   - Required for earthquake and geological data
+   - Free tier: No rate limits
+   - Required for earthquake and geological data
 
 4. **Mapbox Token**: Get from [Mapbox](https://www.mapbox.com)
-   - Free tier: 50,000 map loads/month
-   - Required for interactive maps and geospatial visualization
+   - Free tier: 50,000 map loads/month
+   - Required for interactive maps and geospatial visualization
 
 #### **🔊 Additional Services**
 1. **Google Gemini API**: Get from [Google AI Studio](https://makersuite.google.com)
-   - Free tier: 15 requests/minute
-   - Required for voice commands and AI chat
+   - Free tier: 15 requests/minute
+   - Required for voice commands and AI chat
 
 2. **IPFS/Arweave**: For decentralized data storage
-   - **Pinata**: Get from [Pinata](https://pinata.cloud) (IPFS)
-   - **Bundlr**: Get from [Bundlr](https://bundlr.network) (Arweave)
+   - **Pinata**: Get from [Pinata](https://pinata.cloud) (IPFS)
+   - **Bundlr**: Get from [Bundlr](https://bundlr.network) (Arweave)
 
 ---
 
@@ -221,17 +227,17 @@ VITE_ENABLE_3D_VISUALIZATION=true
 
 ### **System Architecture**
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │   Backend       │    │   Blockchain    │
-│   (React/Vite)  │◄──►│   (FastAPI)     │◄──►│   (Solana)      │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         │                       │                       │
-         ▼                       ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   WebSocket     │    │   Swarms AI     │    │   IPFS/Arweave  │
-│   (Real-time)   │    │   (Agents)      │    │   (Storage)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │   Backend       │    │   Blockchain    │
+│   (React/Vite)  │◄──►│   (FastAPI)     │◄──►│   (Solana)      │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   WebSocket     │    │   Swarms AI     │    │   IPFS/Arweave  │
+│   (Real-time)   │    │   (Agents)      │    │   (Storage)     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
 ### **Key Components**
@@ -300,25 +306,25 @@ VITE_ENABLE_3D_VISUALIZATION=true
 ### **Project Structure**
 ```
 nebula-protocol/
-├── backend/                 # FastAPI backend
-│   ├── app/
-│   │   ├── api/            # API endpoints
-│   │   ├── agents/         # Swarms AI agents
-│   │   ├── db/             # Database models
-│   │   ├── services/       # External API services
-│   │   └── main.py         # FastAPI application
-│   └── requirements.txt
-├── frontend/               # React frontend
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── contexts/      # React contexts
-│   │   ├── hooks/         # Custom hooks
-│   │   ├── lib/           # Utility libraries
-│   │   ├── pages/         # Page components
-│   │   └── styles/        # CSS styles
-│   └── package.json
-├── contracts/             # Solana smart contracts
-└── docs/                 # Documentation
+├── backend/                 # FastAPI backend
+│   ├── app/
+│   │   ├── api/            # API endpoints
+│   │   ├── agents/         # Swarms AI agents
+│   │   ├── db/             # Database models
+│   │   ├── services/       # External API services
+│   │   └── main.py         # FastAPI application
+│   └── requirements.txt
+├── frontend/               # React frontend
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   ├── contexts/      # React contexts
+│   │   ├── hooks/         # Custom hooks
+│   │   ├── lib/           # Utility libraries
+│   │   ├── pages/         # Page components
+│   │   └── styles/        # CSS styles
+│   └── package.json
+├── contracts/             # Solana smart contracts
+└── docs/                 # Documentation
 ```
 
 ### **Running Tests**
@@ -405,10 +411,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 **Contact**
 
-- **Team**: Nebula Protocol Development Team
-- **Email**: contact@nebula-protocol.dev
-- **Discord**: [Join our community](https://discord.gg/nebula-protocol)
-- **Twitter**: [@NebulaProtocol](https://twitter.com/NebulaProtocol)
+- **Email**: yadikrish@gmail.com
+
 
 ---
 
@@ -422,5 +426,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Built with ❤️ for a sustainable future*#   N e b u l a - 2 . 0 - - - D e c e n t r a l i z e d - E a r t h - O b s e r v a t i o n - P l a t f o r m  
- 
+*Built with ❤️ for a sustainable future*
