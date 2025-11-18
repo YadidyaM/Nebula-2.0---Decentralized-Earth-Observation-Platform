@@ -1,3 +1,4 @@
+// Main React application component with 3D Earth visualization, Gemini AI chat, and real-time satellite telemetry
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'

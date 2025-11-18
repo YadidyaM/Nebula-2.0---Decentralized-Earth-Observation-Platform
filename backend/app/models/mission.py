@@ -1,3 +1,4 @@
+# Mission data models for LangGraph workflows, Gemini-powered planning, and agent coordination
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 from datetime import datetime

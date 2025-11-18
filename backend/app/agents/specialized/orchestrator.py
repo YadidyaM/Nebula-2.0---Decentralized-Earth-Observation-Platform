@@ -1,3 +1,4 @@
+# Main orchestrator agent using LangGraph workflows for state machine-based agent coordination
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 import asyncio
@@ -8,6 +9,7 @@ from app.agents.base_agent import BaseAgent, OrchestratorAgent
 from app.models.agent import AgentStatus, Position
 from app.models.mission import Mission, MissionStatus, MissionType
 from app.services.ai.swarms_orchestrator import SwarmsOrchestrator
+from app.agents.langgraph_orchestrator import LangGraphOrchestrator
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +23,7 @@ class Orchestrator(BaseAgent):
         self.mission_queue: List[Mission] = []
         self.active_missions: Dict[str, Mission] = {}
         self.swarms_orchestrator: Optional[SwarmsOrchestrator] = None
+        self.langgraph_orchestrator: Optional[LangGraphOrchestrator] = None
         self.running = False
         self.performance_metrics = {
             "missions_completed": 0,
@@ -43,14 +46,31 @@ class Orchestrator(BaseAgent):
         except Exception as e:
             logger.warning(f"Failed to initialize Swarms orchestrator: {e}")
         
+        # Initialize LangGraph orchestrator
+        try:
+            self.langgraph_orchestrator = LangGraphOrchestrator(self.swarms_orchestrator)
+            # Register all managed agents with LangGraph orchestrator
+            for agent_id, agent in self.managed_agents.items():
+                self.langgraph_orchestrator.register_agent(agent)
+            logger.info("LangGraph orchestrator initialized")
+        except Exception as e:
+            logger.warning(f"Failed to initialize LangGraph orchestrator: {e}")
+        
         # Start background tasks
         asyncio.create_task(self._mission_distributor())
         asyncio.create_task(self._agent_monitor())
         asyncio.create_task(self._performance_analyzer())
     
     async def execute_mission(self, mission: Mission) -> Dict[str, Any]:
-        """Orchestrator doesn't execute missions directly, it coordinates them"""
+        """Execute mission using LangGraph workflows for intelligent coordination"""
         try:
+            # Use LangGraph orchestrator if available
+            if self.langgraph_orchestrator:
+                logger.info(f"Executing mission {mission.id} using LangGraph workflow")
+                result = await self.langgraph_orchestrator.execute_mission(mission)
+                return result
+            
+            # Fallback to queue-based system
             # Add mission to queue
             await self.assign_mission(mission)
             

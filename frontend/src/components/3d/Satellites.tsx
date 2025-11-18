@@ -1,3 +1,4 @@
+// 3D satellite visualization component displaying real-time satellite positions using SGP4 orbital mechanics and physics simulation
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import * as THREE from 'three';
 import { TelemetryData, Position } from '../types';

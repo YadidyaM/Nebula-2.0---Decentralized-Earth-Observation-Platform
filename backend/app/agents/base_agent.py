@@ -1,3 +1,4 @@
+# Base agent class providing foundation for all specialized AI agents with Gemini AI integration
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional, Any
 from datetime import datetime
@@ -8,6 +9,7 @@ from app.models.agent import Agent, AgentStatus, Position
 from app.models.mission import Mission, MissionStatus
 from app.services.blockchain.solana_client import SolanaClient
 from app.services.ai.swarms_orchestrator import SwarmsOrchestrator
+from app.services.ai.gemini_service import gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -38,8 +40,18 @@ class BaseAgent(ABC):
     
     @abstractmethod
     async def process_environmental_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Process environmental data and detect anomalies"""
-        pass
+        """Process environmental data and detect anomalies using Gemini AI for intelligent reasoning"""
+        # Base implementation with Gemini AI support
+        if gemini_service.is_available():
+            try:
+                analysis = await gemini_service.detect_anomalies(
+                    data,
+                    f"Environmental data analysis for {self.name}"
+                )
+                return analysis or {"agent_id": self.agent_id, "analysis": "completed"}
+            except Exception as e:
+                logger.error(f"Error in Gemini analysis for {self.name}: {e}")
+        return {"agent_id": self.agent_id, "analysis": "completed"}
     
     async def update_status(self, status: AgentStatus):
         """Update agent status"""

@@ -1,9 +1,12 @@
+# Specialized agent for forest monitoring and deforestation detection with Gemini AI integration
 from app.agents.base_agent import BaseAgent
 from app.models.agent import AgentStatus, Position
 from app.models.mission import Mission, MissionType
+from app.services.ai.gemini_service import gemini_service
 from typing import Dict, Any
 import logging
 import random
+import asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +23,7 @@ class ForestGuardianAgent(BaseAgent):
         logger.info("Forest Guardian Agent initialized")
     
     async def execute_mission(self, mission: Mission) -> Dict[str, Any]:
-        """Execute forest monitoring mission"""
+        """Execute forest monitoring mission with Gemini AI analysis"""
         logger.info(f"Forest Guardian executing mission: {mission.name}")
         
         # Simulate mission execution
@@ -44,11 +47,28 @@ class ForestGuardianAgent(BaseAgent):
             "processing_time": random.uniform(2.5, 8.0)
         }
         
+        # Use Gemini for intelligent analysis and anomaly detection
+        if gemini_service.is_available():
+            try:
+                gemini_analysis = await gemini_service.detect_anomalies(
+                    results,
+                    f"Forest monitoring mission {mission.id} - analyzing deforestation patterns, biodiversity, and forest health"
+                )
+                if gemini_analysis:
+                    results["gemini_analysis"] = gemini_analysis
+                    # Enhance results with Gemini insights
+                    if "anomalies" in gemini_analysis:
+                        results["anomalies"].extend(gemini_analysis.get("anomalies", []))
+                    if "confidence_score" in gemini_analysis:
+                        results["confidence_score"] = gemini_analysis["confidence_score"]
+            except Exception as e:
+                logger.error(f"Error in Gemini analysis for Forest Guardian: {e}")
+        
         await self.complete_mission(results)
         return results
     
     async def process_environmental_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Process forest-related environmental data"""
+        """Process forest-related environmental data with Gemini AI reasoning"""
         analysis = {
             "agent_type": "forest_guardian",
             "data_type": "forest_monitoring",
@@ -68,10 +88,30 @@ class ForestGuardianAgent(BaseAgent):
             analysis["fire_risk"] = "high"
             analysis["recommendations"].append("fire_prevention_measures")
         
+        # Use Gemini for enhanced reasoning and pattern recognition
+        if gemini_service.is_available():
+            try:
+                gemini_reasoning = await gemini_service.reason_about_mission(
+                    {
+                        "type": "forestry",
+                        "data": data,
+                        "current_analysis": analysis
+                    },
+                    self.specialization
+                )
+                if gemini_reasoning:
+                    # Enhance analysis with Gemini insights
+                    if "recommendations" in gemini_reasoning:
+                        analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+                    if "optimization_suggestions" in gemini_reasoning:
+                        analysis["gemini_suggestions"] = gemini_reasoning["optimization_suggestions"]
+            except Exception as e:
+                logger.error(f"Error in Gemini reasoning for Forest Guardian: {e}")
+        
         return analysis
 
 class IceSentinelAgent(BaseAgent):
-    """Specialized agent for cryosphere monitoring and ice sheet analysis"""
+    """Specialized agent for cryosphere monitoring and ice sheet analysis with Gemini AI"""
     
     def __init__(self, wallet_address: str):
         super().__init__("agent_ice_sentinel", "Ice Sentinel", wallet_address)
@@ -83,7 +123,7 @@ class IceSentinelAgent(BaseAgent):
         logger.info("Ice Sentinel Agent initialized")
     
     async def execute_mission(self, mission: Mission) -> Dict[str, Any]:
-        """Execute cryosphere monitoring mission"""
+        """Execute cryosphere monitoring mission with Gemini AI climate pattern analysis"""
         logger.info(f"Ice Sentinel executing mission: {mission.name}")
         
         await asyncio.sleep(random.uniform(8, 20))  # Longer processing for ice analysis
@@ -106,11 +146,25 @@ class IceSentinelAgent(BaseAgent):
             "processing_time": random.uniform(5.0, 12.0)
         }
         
+        # Use Gemini for climate pattern analysis and reasoning
+        if gemini_service.is_available():
+            try:
+                gemini_analysis = await gemini_service.detect_anomalies(
+                    results,
+                    f"Cryosphere monitoring mission {mission.id} - analyzing ice sheet changes, glacier retreat, and climate patterns"
+                )
+                if gemini_analysis:
+                    results["gemini_analysis"] = gemini_analysis
+                    if "anomalies" in gemini_analysis:
+                        results["anomalies"].extend(gemini_analysis.get("anomalies", []))
+            except Exception as e:
+                logger.error(f"Error in Gemini analysis for Ice Sentinel: {e}")
+        
         await self.complete_mission(results)
         return results
     
     async def process_environmental_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Process cryosphere-related environmental data"""
+        """Process cryosphere-related environmental data with Gemini AI reasoning"""
         analysis = {
             "agent_type": "ice_sentinel",
             "data_type": "cryosphere_monitoring",
@@ -127,10 +181,27 @@ class IceSentinelAgent(BaseAgent):
             analysis["sea_level_impact"] = "high"
             analysis["recommendations"].append("urgent_climate_action")
         
+        # Use Gemini for enhanced climate pattern reasoning
+        if gemini_service.is_available():
+            try:
+                gemini_reasoning = await gemini_service.reason_about_mission(
+                    {
+                        "type": "cryosphere",
+                        "data": data,
+                        "current_analysis": analysis
+                    },
+                    self.specialization
+                )
+                if gemini_reasoning:
+                    if "recommendations" in gemini_reasoning:
+                        analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+            except Exception as e:
+                logger.error(f"Error in Gemini reasoning for Ice Sentinel: {e}")
+        
         return analysis
 
 class StormTrackerAgent(BaseAgent):
-    """Specialized agent for weather monitoring and storm tracking"""
+    """Specialized agent for weather monitoring and storm tracking with Gemini AI"""
     
     def __init__(self, wallet_address: str):
         super().__init__("agent_storm_tracker", "Storm Tracker", wallet_address)
@@ -142,7 +213,7 @@ class StormTrackerAgent(BaseAgent):
         logger.info("Storm Tracker Agent initialized")
     
     async def execute_mission(self, mission: Mission) -> Dict[str, Any]:
-        """Execute weather monitoring mission"""
+        """Execute weather monitoring mission with Gemini AI for weather prediction and storm tracking"""
         logger.info(f"Storm Tracker executing mission: {mission.name}")
         
         await asyncio.sleep(random.uniform(3, 10))
@@ -171,11 +242,25 @@ class StormTrackerAgent(BaseAgent):
             "processing_time": random.uniform(2.0, 6.0)
         }
         
+        # Use Gemini for weather prediction and storm tracking analysis
+        if gemini_service.is_available():
+            try:
+                gemini_analysis = await gemini_service.detect_anomalies(
+                    results,
+                    f"Weather monitoring mission {mission.id} - analyzing storm patterns, atmospheric conditions, and weather risks"
+                )
+                if gemini_analysis:
+                    results["gemini_analysis"] = gemini_analysis
+                    if "anomalies" in gemini_analysis:
+                        results["anomalies"].extend(gemini_analysis.get("anomalies", []))
+            except Exception as e:
+                logger.error(f"Error in Gemini analysis for Storm Tracker: {e}")
+        
         await self.complete_mission(results)
         return results
     
     async def process_environmental_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Process weather-related environmental data"""
+        """Process weather-related environmental data with Gemini AI"""
         analysis = {
             "agent_type": "storm_tracker",
             "data_type": "weather_monitoring",
@@ -196,5 +281,22 @@ class StormTrackerAgent(BaseAgent):
         if pressure < 1000:  # Low pressure system
             analysis["storm_risk"] = "high"
             analysis["recommendations"].append("evacuation_preparation")
+        
+        # Use Gemini for enhanced weather prediction
+        if gemini_service.is_available():
+            try:
+                gemini_reasoning = await gemini_service.reason_about_mission(
+                    {
+                        "type": "weather",
+                        "data": data,
+                        "current_analysis": analysis
+                    },
+                    self.specialization
+                )
+                if gemini_reasoning:
+                    if "recommendations" in gemini_reasoning:
+                        analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+            except Exception as e:
+                logger.error(f"Error in Gemini reasoning for Storm Tracker: {e}")
         
         return analysis

@@ -1,9 +1,12 @@
+# Specialized agent for urban infrastructure and city development monitoring with Gemini AI integration
 from app.agents.base_agent import BaseAgent
 from app.models.agent import AgentStatus, Position
 from app.models.mission import Mission, MissionType
+from app.services.ai.gemini_service import gemini_service
 from typing import Dict, Any
 import logging
 import random
+import asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +23,7 @@ class UrbanMonitorAgent(BaseAgent):
         logger.info("Urban Monitor Agent initialized")
     
     async def execute_mission(self, mission: Mission) -> Dict[str, Any]:
-        """Execute urban monitoring mission"""
+        """Execute urban monitoring mission with Gemini AI for urban development analysis"""
         logger.info(f"Urban Monitor executing mission: {mission.name}")
         
         await asyncio.sleep(random.uniform(4, 12))
@@ -45,11 +48,23 @@ class UrbanMonitorAgent(BaseAgent):
             "processing_time": random.uniform(3.0, 8.0)
         }
         
+        # Use Gemini for urban development analysis
+        if gemini_service.is_available():
+            try:
+                gemini_analysis = await gemini_service.detect_anomalies(
+                    results,
+                    f"Urban monitoring mission {mission.id} - analyzing urban development, infrastructure quality, and sustainability"
+                )
+                if gemini_analysis:
+                    results["gemini_analysis"] = gemini_analysis
+            except Exception as e:
+                logger.error(f"Error in Gemini analysis for Urban Monitor: {e}")
+        
         await self.complete_mission(results)
         return results
     
     async def process_environmental_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Process urban-related environmental data"""
+        """Process urban-related environmental data with Gemini AI"""
         analysis = {
             "agent_type": "urban_monitor",
             "data_type": "urban_monitoring",
@@ -71,10 +86,22 @@ class UrbanMonitorAgent(BaseAgent):
             analysis["infrastructure_alerts"].append("maintenance_required")
             analysis["recommendations"].append("infrastructure_upgrade")
         
+        # Use Gemini for enhanced urban analysis
+        if gemini_service.is_available():
+            try:
+                gemini_reasoning = await gemini_service.reason_about_mission(
+                    {"type": "urban_infrastructure", "data": data, "current_analysis": analysis},
+                    self.specialization
+                )
+                if gemini_reasoning and "recommendations" in gemini_reasoning:
+                    analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+            except Exception as e:
+                logger.error(f"Error in Gemini reasoning for Urban Monitor: {e}")
+        
         return analysis
 
 class WaterWatcherAgent(BaseAgent):
-    """Specialized agent for hydrology and water resource monitoring"""
+    """Specialized agent for hydrology and water resource monitoring with Gemini AI"""
     
     def __init__(self, wallet_address: str):
         super().__init__("agent_water_watcher", "Water Watcher", wallet_address)
@@ -86,7 +113,7 @@ class WaterWatcherAgent(BaseAgent):
         logger.info("Water Watcher Agent initialized")
     
     async def execute_mission(self, mission: Mission) -> Dict[str, Any]:
-        """Execute water monitoring mission"""
+        """Execute water monitoring mission with Gemini AI for hydrological pattern recognition"""
         logger.info(f"Water Watcher executing mission: {mission.name}")
         
         await asyncio.sleep(random.uniform(5, 15))
@@ -115,11 +142,23 @@ class WaterWatcherAgent(BaseAgent):
             "processing_time": random.uniform(4.0, 10.0)
         }
         
+        # Use Gemini for hydrological pattern recognition
+        if gemini_service.is_available():
+            try:
+                gemini_analysis = await gemini_service.detect_anomalies(
+                    results,
+                    f"Water monitoring mission {mission.id} - analyzing hydrological patterns, water quality, and flood risks"
+                )
+                if gemini_analysis:
+                    results["gemini_analysis"] = gemini_analysis
+            except Exception as e:
+                logger.error(f"Error in Gemini analysis for Water Watcher: {e}")
+        
         await self.complete_mission(results)
         return results
     
     async def process_environmental_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Process water-related environmental data"""
+        """Process water-related environmental data with Gemini AI"""
         analysis = {
             "agent_type": "water_watcher",
             "data_type": "water_monitoring",
@@ -141,10 +180,22 @@ class WaterWatcherAgent(BaseAgent):
             analysis["water_quality_alerts"].append("contamination_detected")
             analysis["recommendations"].append("water_treatment_required")
         
+        # Use Gemini for enhanced hydrological analysis
+        if gemini_service.is_available():
+            try:
+                gemini_reasoning = await gemini_service.reason_about_mission(
+                    {"type": "hydrology", "data": data, "current_analysis": analysis},
+                    self.specialization
+                )
+                if gemini_reasoning and "recommendations" in gemini_reasoning:
+                    analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+            except Exception as e:
+                logger.error(f"Error in Gemini reasoning for Water Watcher: {e}")
+        
         return analysis
 
 class SecuritySentinelAgent(BaseAgent):
-    """Specialized agent for security monitoring and border surveillance"""
+    """Specialized agent for security monitoring and border surveillance with Gemini AI"""
     
     def __init__(self, wallet_address: str):
         super().__init__("agent_security_sentinel", "Security Sentinel", wallet_address)
@@ -156,7 +207,7 @@ class SecuritySentinelAgent(BaseAgent):
         logger.info("Security Sentinel Agent initialized")
     
     async def execute_mission(self, mission: Mission) -> Dict[str, Any]:
-        """Execute security monitoring mission"""
+        """Execute security monitoring mission with Gemini AI for threat detection"""
         logger.info(f"Security Sentinel executing mission: {mission.name}")
         
         await asyncio.sleep(random.uniform(6, 18))
@@ -183,11 +234,23 @@ class SecuritySentinelAgent(BaseAgent):
             "processing_time": random.uniform(5.0, 15.0)
         }
         
+        # Use Gemini for threat detection
+        if gemini_service.is_available():
+            try:
+                gemini_analysis = await gemini_service.detect_anomalies(
+                    results,
+                    f"Security monitoring mission {mission.id} - analyzing threats, movement patterns, and infrastructure status"
+                )
+                if gemini_analysis:
+                    results["gemini_analysis"] = gemini_analysis
+            except Exception as e:
+                logger.error(f"Error in Gemini analysis for Security Sentinel: {e}")
+        
         await self.complete_mission(results)
         return results
     
     async def process_environmental_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Process security-related environmental data"""
+        """Process security-related environmental data with Gemini AI"""
         analysis = {
             "agent_type": "security_sentinel",
             "data_type": "security_monitoring",
@@ -209,5 +272,17 @@ class SecuritySentinelAgent(BaseAgent):
         if infra_status != "normal":
             analysis["infrastructure_status"] = infra_status
             analysis["recommendations"].append("infrastructure_inspection")
+        
+        # Use Gemini for enhanced threat detection
+        if gemini_service.is_available():
+            try:
+                gemini_reasoning = await gemini_service.reason_about_mission(
+                    {"type": "security", "data": data, "current_analysis": analysis},
+                    self.specialization
+                )
+                if gemini_reasoning and "recommendations" in gemini_reasoning:
+                    analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+            except Exception as e:
+                logger.error(f"Error in Gemini reasoning for Security Sentinel: {e}")
         
         return analysis

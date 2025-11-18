@@ -1,3 +1,4 @@
+# Main FastAPI application entry point with LangGraph orchestrator, Gemini AI, and enhanced satellite physics initialization
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -8,8 +9,9 @@ from contextlib import asynccontextmanager
 from app.api.v1.router import api_router
 from app.db.mongodb import connect_to_mongo, close_mongo_connection
 from app.services.blockchain.solana_client import SolanaClient
-from app.agents.orchestrator import OrchestratorAgent
+from app.agents.specialized.orchestrator import Orchestrator
 from app.services.ai.swarms_orchestrator import SwarmsOrchestrator
+from app.services.ai.gemini_service import gemini_service
 from app.services.satellite_physics import satellite_physics_engine
 
 # Global variables for services
@@ -38,15 +40,21 @@ async def lifespan(app: FastAPI):
     await swarms_orchestrator.initialize()
     print("✅ Swarms AI orchestrator initialized")
     
-    # Initialize agent orchestrator
-    global orchestrator
-    orchestrator = OrchestratorAgent(solana_client, swarms_orchestrator)
-    await orchestrator.start()
-    print("✅ Agent orchestrator started")
+    # Initialize Gemini AI service
+    if gemini_service.is_available():
+        print("✅ Gemini AI service initialized")
+    else:
+        print("⚠️  Gemini AI service not available (API key may be missing)")
     
-    # Initialize satellite physics engine
+    # Initialize agent orchestrator with LangGraph workflows
+    global orchestrator
+    orchestrator = Orchestrator()
+    await orchestrator.initialize()
+    print("✅ Agent orchestrator with LangGraph workflows initialized")
+    
+    # Initialize enhanced satellite physics engine with Poliastro, Skyfield
     await satellite_physics_engine.initialize()
-    print("✅ Satellite physics engine initialized")
+    print("✅ Enhanced satellite physics engine initialized")
     
     print("🌟 Nebula Protocol Backend ready!")
     
@@ -55,7 +63,7 @@ async def lifespan(app: FastAPI):
     # Shutdown
     print("🛑 Shutting down Nebula Protocol Backend...")
     if orchestrator:
-        await orchestrator.stop()
+        orchestrator.running = False
     await satellite_physics_engine.shutdown()
     await close_mongo_connection()
     print("✅ Shutdown complete")
@@ -97,6 +105,8 @@ async def health_check():
         "mongodb": "connected",
         "solana": "connected" if solana_client else "disconnected",
         "swarms_ai": "connected" if swarms_orchestrator else "disconnected",
+        "gemini_ai": "available" if gemini_service.is_available() else "unavailable",
+        "langgraph": "active" if orchestrator and orchestrator.langgraph_orchestrator else "inactive",
         "orchestrator": "active" if orchestrator else "inactive",
         "satellite_physics": "active" if satellite_physics_engine.is_running else "inactive"
     }

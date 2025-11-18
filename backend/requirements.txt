@@ -8,6 +8,10 @@ redis>=5.0.0
 # AI and Machine Learning
 swarms>=4.0.0
 openai>=1.0.0
+langgraph>=0.0.20
+langchain>=0.1.0
+langchain-google-genai>=1.0.0
+google-generativeai>=0.3.0
 
 # Blockchain
 solana>=0.30.0
@@ -17,7 +21,10 @@ anchorpy>=0.19.0
 sgp4>=2.21
 numpy>=1.21.0
 scipy>=1.7.0
-astropy>=5.0.0
+astropy>=6.0.0
+poliastro>=0.19.0
+skyfield>=1.47
+pyorbital>=1.8.0
 
 # External APIs
 requests>=2.31.0

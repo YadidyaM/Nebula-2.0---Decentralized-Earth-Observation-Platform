@@ -1,3 +1,4 @@
+// Main dashboard page displaying real-time satellite telemetry, agent status, mission control, and 3D Earth visualization
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ErrorBoundary } from 'react-error-boundary'
