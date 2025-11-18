@@ -6,6 +6,12 @@ class Settings(BaseSettings):
     # Swarms AI
     swarms_ai_api_key: str = os.getenv("SWARMS_AI_API_KEY", "")
     
+    # Gemini AI
+    gemini_api_key: str = os.getenv("GEMINI_API_KEY", "")
+    gemini_model: str = os.getenv("GEMINI_MODEL", "gemini-pro")
+    gemini_vision_model: str = os.getenv("GEMINI_VISION_MODEL", "gemini-pro-vision")
+    gemini_flash_model: str = os.getenv("GEMINI_FLASH_MODEL", "gemini-flash")
+    
     # Solana
     solana_rpc_url: str = os.getenv("SOLANA_RPC_URL", "https://api.devnet.solana.com")
     solana_network: str = os.getenv("SOLANA_NETWORK", "devnet")

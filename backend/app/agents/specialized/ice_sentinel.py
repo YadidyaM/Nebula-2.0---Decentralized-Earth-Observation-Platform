@@ -1,3 +1,4 @@
+# Specialized agent for cryosphere monitoring and ice sheet analysis with Gemini AI integration
 from typing import Dict, List, Optional, Any
 from datetime import datetime
 import asyncio
@@ -8,6 +9,7 @@ import json
 from app.agents.base_agent import BaseAgent
 from app.models.agent import AgentStatus, Position
 from app.models.mission import Mission, MissionStatus, MissionType
+from app.services.ai.gemini_service import gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -57,7 +59,7 @@ class IceSentinel(BaseAgent):
             return {"error": str(e), "mission_id": mission.id}
     
     async def process_environmental_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Process cryosphere environmental data and detect anomalies"""
+        """Process cryosphere environmental data and detect anomalies with Gemini AI reasoning"""
         try:
             analysis = {
                 "agent_id": self.agent_id,
@@ -106,6 +108,18 @@ class IceSentinel(BaseAgent):
                     })
                     analysis["risk_assessment"] = "high"
                     analysis["recommendations"].append("deploy_emergency_monitoring")
+            
+            # Use Gemini for enhanced climate pattern reasoning
+            if gemini_service.is_available():
+                try:
+                    gemini_reasoning = await gemini_service.reason_about_mission(
+                        {"type": "cryosphere", "data": data, "current_analysis": analysis},
+                        self.specialization
+                    )
+                    if gemini_reasoning and "recommendations" in gemini_reasoning:
+                        analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+                except Exception as e:
+                    logger.error(f"Error in Gemini reasoning for Ice Sentinel: {e}")
             
             return analysis
             

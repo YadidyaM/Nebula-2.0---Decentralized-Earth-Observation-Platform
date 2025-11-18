@@ -1,3 +1,4 @@
+// Frontend Gemini AI client for voice commands, chat messages, mission parameter extraction, risk analysis, and telemetry analysis
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { ChatMessage, VoiceCommand } from "../types";
 

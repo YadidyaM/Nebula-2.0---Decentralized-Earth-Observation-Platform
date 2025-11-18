@@ -1,3 +1,4 @@
+// 3D Earth scene component with Three.js rendering real-time satellite positions, risk heatmaps, and orbital mechanics visualization
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';

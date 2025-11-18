@@ -1,4 +1,4 @@
-#Agent_Factor_monitor
+# Factory class for creating specialized AI agents with Gemini integration and LangGraph orchestration
 from app.agents.base_agent import BaseAgent
 from app.agents.specialized.forest_guardian import ForestGuardianAgent
 from app.agents.specialized.ice_sentinel import IceSentinelAgent

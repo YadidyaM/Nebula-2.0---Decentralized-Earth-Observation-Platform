@@ -1,3 +1,4 @@
+# Specialized agent for hydrology and water resource monitoring with Gemini AI integration
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 import asyncio
@@ -9,6 +10,7 @@ import math
 from app.agents.base_agent import BaseAgent
 from app.models.agent import AgentStatus, Position
 from app.models.mission import Mission, MissionStatus, MissionType
+from app.services.ai.gemini_service import gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -186,6 +188,18 @@ class WaterWatcher(BaseAgent):
                         analysis["water_quality_status"] = "poor"
                         analysis["risk_assessment"] = "high"
                         analysis["recommendations"].append("investigate_pollution_source")
+            
+            # Use Gemini for enhanced hydrological analysis
+            if gemini_service.is_available():
+                try:
+                    gemini_reasoning = await gemini_service.reason_about_mission(
+                        {"type": "hydrology", "data": data, "current_analysis": analysis},
+                        self.specialization
+                    )
+                    if gemini_reasoning and "recommendations" in gemini_reasoning:
+                        analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+                except Exception as e:
+                    logger.error(f"Error in Gemini reasoning for Water Watcher: {e}")
             
             return analysis
             

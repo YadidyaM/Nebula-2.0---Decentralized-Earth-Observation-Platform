@@ -1,3 +1,4 @@
+# Specialized agent for emergency response and disaster assessment with Gemini AI integration
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 import asyncio
@@ -9,6 +10,7 @@ import math
 from app.agents.base_agent import BaseAgent
 from app.models.agent import AgentStatus, Position
 from app.models.mission import Mission, MissionStatus, MissionType
+from app.services.ai.gemini_service import gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -194,6 +196,18 @@ class DisasterResponder(BaseAgent):
                     analysis["resource_requirements"].append("search_rescue_teams")
                     analysis["resource_requirements"].append("medical_emergency_teams")
                     analysis["recommendations"].append("immediate_response_required")
+            
+            # Use Gemini for enhanced emergency response planning
+            if gemini_service.is_available():
+                try:
+                    gemini_reasoning = await gemini_service.reason_about_mission(
+                        {"type": "disaster_management", "data": data, "current_analysis": analysis},
+                        self.specialization
+                    )
+                    if gemini_reasoning and "recommendations" in gemini_reasoning:
+                        analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+                except Exception as e:
+                    logger.error(f"Error in Gemini reasoning for Disaster Responder: {e}")
             
             return analysis
             

@@ -1,3 +1,4 @@
+# Specialized agent for security monitoring and border surveillance with Gemini AI integration
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 import asyncio
@@ -9,6 +10,7 @@ import math
 from app.agents.base_agent import BaseAgent
 from app.models.agent import AgentStatus, Position
 from app.models.mission import Mission, MissionStatus, MissionType
+from app.services.ai.gemini_service import gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -150,6 +152,18 @@ class SecuritySentinel(BaseAgent):
                         analysis["risk_assessment"] = "critical"
                         analysis["security_status"] = "breached"
                         analysis["recommendations"].append("activate_cyber_defense")
+            
+            # Use Gemini for enhanced threat detection
+            if gemini_service.is_available():
+                try:
+                    gemini_reasoning = await gemini_service.reason_about_mission(
+                        {"type": "security", "data": data, "current_analysis": analysis},
+                        self.specialization
+                    )
+                    if gemini_reasoning and "recommendations" in gemini_reasoning:
+                        analysis["recommendations"].extend(gemini_reasoning["recommendations"])
+                except Exception as e:
+                    logger.error(f"Error in Gemini reasoning for Security Sentinel: {e}")
             
             return analysis
             
